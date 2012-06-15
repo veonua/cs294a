@@ -24,6 +24,20 @@ patches = zeros(patchsize*patchsize, numpatches);
 %  patch corresponding to the pixels in the block (21,21) to (30,30) of
 %  Image 1
 
+%img_side = 512;
+
+% Matrix of numpatches starting x and y coordinates for the image patches
+%start_coords = ceil( (img_side - patchsize + 1) * rand(numpatches, 2) );
+%images_to_sample = ceil( 6 * rand(numpatches, 1) );
+
+%for patch=1:numpatches,
+%coords = start_coords(patch, :);
+%x=coords(1); y=coords(2);
+%sample = IMAGES(x:(x+patchsize-1), y:(y+patchsize-1), images_to_sample(patch));
+%patches(:,patch) = sample(:);
+%end
+
+
 numimages = size(IMAGES,3);
 imgwidth  = size(IMAGES,1) / patchsize;
 imgheight  = size(IMAGES,2) / patchsize;
@@ -32,14 +46,16 @@ pit = 1;
 for iit = 1:numimages
  for hit = 1:imgheight
   for wit = 1:imgwidth
-   %if pit>numpatches break;
-    patches(:, pit++) = IMAGES( (wit-1)*patchsize+1:wit*patchsize, (hit-1)*patchsize+1:hit*patchsize, iit )(:);
+    if pit>numpatches break; end;
+    
+    patches(:, pit) = IMAGES( (wit-1)*patchsize+1:wit*patchsize, (hit-1)*patchsize+1:hit*patchsize, iit )(:);
+    pit=pit+1;
   end
  end
 end
 
 
-
+% LABEL Break
 
 
 
