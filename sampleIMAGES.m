@@ -24,12 +24,22 @@ patches = zeros(patchsize*patchsize, numpatches);
 %  patch corresponding to the pixels in the block (21,21) to (30,30) of
 %  Image 1
 
-ss = size(IMAGES)
+numimages = size(IMAGES,3);
+imgwidth  = size(IMAGES,1) / patchsize;
+imgheight  = size(IMAGES,2) / patchsize;
+pit = 1;
 
-for ii=1:10,
-    for yi=1:10,
-        for xi=1:10,
-            
+for iit = 1:numimages
+ for hit = 1:imgheight
+  for wit = 1:imgwidth
+   %if pit>numpatches break;
+    patches(:, pit++) = IMAGES( (wit-1)*patchsize+1:wit*patchsize, (hit-1)*patchsize+1:hit*patchsize, iit )(:);
+  end
+ end
+end
+
+
+
 
 
 
